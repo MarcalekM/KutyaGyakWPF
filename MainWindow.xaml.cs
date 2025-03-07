@@ -20,33 +20,60 @@ namespace KutyaGyakWPF
         List<Kutya> kutyaLista = new List<Kutya>();
         public MainWindow()
         {
-            string connectionString = "server=localhost;user=root;password=;database=kutya";
+            //string connectionString = "server=localhost;user=root;password=;database=kutya";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            //using (MySqlConnection connection = new MySqlConnection(connectionString))
+            //{
+            //    connection.Open();
+
+            //    string kutyaQuery =
+            //        "SELECT kutyak.id, kutyak.nev, kan, fajtak.id, fajtak.fajta, gazdak.id, gazdak.nev, gazdak.tel, kor, chipdatum, kepurl FROM kutyak inner join gazdak on kutyak.gazdaid = gazdak.id inner join fajtak on kutyak.fajtaid = fajtak.id";
+            //    using (MySqlCommand command = new MySqlCommand(kutyaQuery, connection))
+            //    using (MySqlDataReader reader = command.ExecuteReader())
+            //    {
+            //        while (reader.Read())
+            //        {
+            //            int id = reader.GetInt32(0);
+            //            string nev = reader.GetString(1);
+            //            bool kan = reader.GetBoolean(2);
+            //            Fajta fajta = new Fajta(reader.GetInt32(3), reader.GetString(4));
+            //            Gazda gazda = new Gazda(reader.GetInt32(5), reader.GetString(6), reader.GetString(7));
+            //            int kor = reader.GetInt32(8);
+            //            DateTime chipDatum = reader.GetDateTime(9);
+            //            string kepUrl = reader.GetString(10);
+
+            //            Kutya kutya = new Kutya(id, nev, kan, kor, chipDatum, kepUrl, fajta, gazda);
+            //            kutyaLista.Add(kutya);
+            //        }
+            //    }
+            //    connection.Close();
+            //}
+
+            string connectionString2 = "server=localhost;user=root;paasword=;database=kutya";
+
+            using (MySqlConnection connection2 = new MySqlConnection(connectionString2))
             {
-                connection.Open();
+                connection2.Open();
 
-                string kutyaQuery =
-                    "SELECT kutyak.id, kutyak.nev, kan, fajtak.id, fajtak.fajta, gazdak.id, gazdak.nev, gazdak.tel, kor, chipdatum, kepurl FROM kutyak inner join gazdak on kutyak.gazdaid = gazdak.id inner join fajtak on kutyak.fajtaid = fajtak.id";
-                using (MySqlCommand command = new MySqlCommand(kutyaQuery, connection))
-                using (MySqlDataReader reader = command.ExecuteReader())
+                string Query2 = "SELECT kutyak.id, kutyak.nev, kan, fajtak.id, fajtak.fajta, gazdak.id, gazdak.nev, gazdak.tel, kor, chipdatum, kepurl FROM kutyak inner join gazdak on kutyak.gazdaid = gazdak.id inner join fajtak on kutyak.fajtaid = fajtak.id";
+                using (MySqlCommand command2 = new MySqlCommand(Query2, connection2))
+                using (MySqlDataReader reader2 = command2.ExecuteReader())
                 {
-                    while (reader.Read())
+                    while (reader2.Read())
                     {
-                        int id = reader.GetInt32(0);
-                        string nev = reader.GetString(1);
-                        bool kan = reader.GetBoolean(2);
-                        Fajta fajta = new Fajta(reader.GetInt32(3), reader.GetString(4));
-                        Gazda gazda = new Gazda(reader.GetInt32(5), reader.GetString(6), reader.GetString(7));
-                        int kor = reader.GetInt32(8);
-                        DateTime chipDatum = reader.GetDateTime(9);
-                        string kepUrl = reader.GetString(10);
-
+                        int id = reader2.GetInt32(0);
+                        string nev = reader2.GetString(1);
+                        bool kan = reader2.GetBoolean(2);
+                        Fajta fajta = new Fajta(reader2.GetInt32(3), reader2.GetString(4));
+                        Gazda gazda = new Gazda(reader2.GetInt32(5), reader2.GetString(6), reader2.GetString(7));
+                        int kor = reader2.GetInt32(8);
+                        DateTime chipDatum = reader2.GetDateTime(9);
+                        string kepUrl = reader2.GetString(10);
                         Kutya kutya = new Kutya(id, nev, kan, kor, chipDatum, kepUrl, fajta, gazda);
                         kutyaLista.Add(kutya);
                     }
                 }
-                connection.Close();
+                connection2.Close();
             }
 
             InitializeComponent();
