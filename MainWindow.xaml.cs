@@ -22,8 +22,6 @@ namespace KutyaGyakWPF
         {
             string connectionString = "server=localhost;user=root;password=;database=kutya";
 
-
-
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
